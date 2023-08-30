@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:innova/features/screens/landing_page.dart';
+import 'package:innova/features/screens/nav_bar.dart';
 import 'package:innova/features/widgets/custom_social_container.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -29,11 +29,10 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(
-                'assets/img/backgroung.png',
-              ),
-              fit: BoxFit.cover
-            ),
+                image: AssetImage(
+                  'assets/img/backgroung.png',
+                ),
+                fit: BoxFit.cover),
           ),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 0.07),
@@ -163,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const LandingPage(),
+                                builder: (context) => const NavBar(),
                               ),
                               (Route route) => false,
                             );
@@ -173,13 +172,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: height * 0.07,
                           width: width * 0.9,
                           decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.primary,
+                              color: (ematch != 1 && pmatch != 1)
+                                  ? Theme.of(context).colorScheme.primary
+                                  :const Color(0xffB6D3FF),
                               borderRadius: BorderRadius.circular(5)),
-                          child: const Center(
+                          child: Center(
                             child: Text(
                               "Login",
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: (ematch != 1 && pmatch != 1)
+                                      ? Colors.white
+                                      :Colors.grey,
                                   fontSize: 26,
                                   fontWeight: FontWeight.w600),
                             ),
