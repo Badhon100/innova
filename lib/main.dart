@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:innova/features/screens/landing_page.dart';
+import 'package:innova/features/screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const LandingPage(),
+      home: const SplashScreen(),
     );
   }
 }
