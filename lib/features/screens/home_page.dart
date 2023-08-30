@@ -1,6 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:innova/features/screens/shoe_details.dart';
+import 'package:innova/features/widgets/best_choice_card.dart';
+import 'package:innova/features/widgets/logo_container.dart';
+import 'package:innova/features/widgets/popular_shoe_card.dart';
+import 'package:innova/util/brand_logos.dart';
+import 'package:innova/util/shoe_details.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -9,7 +15,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
@@ -21,7 +27,7 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: InkWell(
-                onTap: ()=> ZoomDrawer.of(context)!.toggle(),
+                onTap: () => ZoomDrawer.of(context)!.toggle(),
                 child: Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -69,37 +75,111 @@ class HomePage extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(25)),
                 child: IconButton(
-                    onPressed: () {}, icon: Icon(Icons.shopping_bag)),
+                  onPressed: () {},
+                  icon: const Icon(
+                    CupertinoIcons.bag,
+                  ),
+                ),
               ),
             ),
           ],
         ),
       ),
-
       body: Column(
         children: [
-          SizedBox(height: height*0.03,),
+          SizedBox(
+            height: height * 0.03,
+          ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: width*0.05),
+            padding: EdgeInsets.symmetric(horizontal: width * 0.05),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(50)
-              ),
+                  color: Colors.white, borderRadius: BorderRadius.circular(50)),
               child: TextField(
                 decoration: InputDecoration(
                   prefixIcon: const Icon(CupertinoIcons.search),
                   border: InputBorder.none,
                   hintText: "Looking for shoes",
                   enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        width: 3, color: Colors.white),
+                    borderSide: const BorderSide(width: 3, color: Colors.white),
                     borderRadius: BorderRadius.circular(50.0),
                   ),
                 ),
               ),
             ),
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+            child: SizedBox(
+              height: 70,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return logoContainer(brandLogos[index]);
+                  }),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Popular Shoes",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text("See all"),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: height * 0.27,
+            child: ListView.builder(
+              itemCount: shoeDetails.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return PopularShoeCard(
+                  width: width,
+                  height: height,
+                  image: shoeDetails[index]['image']!,
+                  name: shoeDetails[index]['name']!,
+                  price: shoeDetails[index]['price']!,
+                  onDetailsTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ShoeDetails(index: index),
+                      ),
+                    );
+                  },
+                  onTap: () {
+                    print("added");
+                  },
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "New Arrivals",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text("See all"),
+                ),
+              ],
+            ),
+          ),
+          BestChoiceCard(width: width, height: height),
         ],
       ),
     );
