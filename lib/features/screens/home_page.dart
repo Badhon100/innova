@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -19,18 +20,21 @@ class HomePage extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(25)),
-                child: Center(
-                  child: Image.asset(
-                    'assets/img/menu1.png',
-                    height: 50,
-                    width: 50,
-                    color: Colors.black,
-                    // height: 10,
-                    // width: 10,
+              child: InkWell(
+                onTap: ()=> ZoomDrawer.of(context)!.toggle(),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(25)),
+                  child: Center(
+                    child: Image.asset(
+                      'assets/img/menu1.png',
+                      height: 50,
+                      width: 50,
+                      color: Colors.black,
+                      // height: 10,
+                      // width: 10,
+                    ),
                   ),
                 ),
               ),
