@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -5,6 +6,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
@@ -68,7 +72,32 @@ class HomePage extends StatelessWidget {
         ),
       ),
 
-      
+      body: Column(
+        children: [
+          SizedBox(height: height*0.03,),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: width*0.05),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(50)
+              ),
+              child: TextField(
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(CupertinoIcons.search),
+                  border: InputBorder.none,
+                  hintText: "Looking for shoes",
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        width: 3, color: Colors.white),
+                    borderRadius: BorderRadius.circular(50.0),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
