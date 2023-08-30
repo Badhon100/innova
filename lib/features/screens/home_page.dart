@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+
 import 'package:innova/features/screens/shoe_details.dart';
 import 'package:innova/features/widgets/best_choice_card.dart';
 import 'package:innova/features/widgets/logo_container.dart';
@@ -8,9 +9,17 @@ import 'package:innova/features/widgets/popular_shoe_card.dart';
 import 'package:innova/util/brand_logos.dart';
 import 'package:innova/util/shoe_details.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({
+    Key? key,
+  }) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int value = 0;
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -74,11 +83,22 @@ class HomePage extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(25)),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    CupertinoIcons.bag,
-                  ),
+                child: Stack(
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        CupertinoIcons.bag,
+                      ),
+                    ),
+                    Positioned(
+                        left: width * 0.08,
+                        child: const Icon(
+                          Icons.brightness_1,
+                          size: 8.0,
+                          color: Colors.redAccent,
+                        ))
+                  ],
                 ),
               ),
             ),
@@ -116,7 +136,21 @@ class HomePage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,
                   itemBuilder: (context, index) {
-                    return logoContainer(brandLogos[index]);
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          value = index;
+                        });
+                      },
+                      child: (value == index)
+                          ? logoAndNameContainer(
+                              brandLogos[index]['image']!,
+                              brandLogos[index]['name']!,
+                              width,
+                              height,
+                              context)
+                          : logoContainer(brandLogos[index]['image']!, width),
+                    );
                   }),
             ),
           ),

@@ -87,7 +87,7 @@ class PopularShoeCard extends StatelessWidget {
                     topLeft: Radius.circular(20),
                     bottomRight: Radius.circular(19),
                   )),
-              child: const Icon(Icons.add),
+              child: const Icon(Icons.add, color: Colors.white,),
             ),
           ),
         ),

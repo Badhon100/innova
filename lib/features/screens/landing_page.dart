@@ -15,7 +15,9 @@ class _LandingPageState extends State<LandingPage> {
   MenuItem currentItem = MenuItems.profile;
   @override
   Widget build(BuildContext context) => ZoomDrawer(
-        moveMenuScreen: false,
+        moveMenuScreen: true,
+        style: DrawerStyle.defaultStyle,
+        menuBackgroundColor: const Color(0xff1A2530),
         mainScreen: const HomePage(),
         menuScreen: Builder(
           builder: (context)=> MenuPage(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:innova/features/screens/landing_page.dart';
 import 'package:innova/features/screens/splash_screen.dart';
 
 void main() {

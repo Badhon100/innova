@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:innova/features/screens/login_screen.dart';
 
 import 'package:innova/util/menu_item.dart';
 
@@ -95,8 +96,19 @@ class MenuPage extends StatelessWidget {
                     color: Colors.grey,
                   ),
                   SizedBox(width: width * 0.05),
-                  const Text("Sign Out",
-                      style: TextStyle(color: Colors.white, fontSize: 17))
+                  InkWell(
+                    onTap: (){
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginScreen(),
+                        ),
+                        (Route route) => false,
+                      );
+                    },
+                    child: const Text("Sign Out",
+                        style: TextStyle(color: Colors.white, fontSize: 17)),
+                  )
                 ],
               ),
             ),
